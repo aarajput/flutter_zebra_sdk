@@ -2,7 +2,7 @@ group 'com.tlt.flutter_zebra_sdk'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.5.20'
+    ext.kotlin_version = "2.1.0"
     repositories {
         google()
         jcenter()
@@ -25,14 +25,29 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    if (project.android.hasProperty("namespace")) {
+        namespace = 'com.tlt.flutter_zebra_sdk'
+    }
+
+    compileSdk = 36
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
     defaultConfig {
-        minSdkVersion 16
+        minSdk = 23
     }
+
     lintOptions {
         disable 'InvalidPackage'
     }
