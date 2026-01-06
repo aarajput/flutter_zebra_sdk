@@ -344,7 +344,8 @@ class FlutterZebraSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
     try {
       printers.clear()
-      NetworkDiscoverer.findPrinters(handleNet)
+//      NetworkDiscoverer.findPrinters(handleNet)
+      BluetoothDiscoverer.findPrinters(context, handleNet)
     } catch (e: Exception) {
       e.printStackTrace()
       result.error("Error", "onDiscovery", e)
