@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.annotation.NonNull
 import com.google.gson.Gson
 import com.zebra.sdk.btleComm.BluetoothLeConnection
+import com.zebra.sdk.btleComm.BluetoothLeDiscoverer
 import com.zebra.sdk.comm.Connection
 import com.zebra.sdk.comm.ConnectionException
 import com.zebra.sdk.comm.TcpConnection
@@ -314,7 +315,7 @@ class FlutterZebraSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         var dataMap = p0.discoveryDataMap
         var address = dataMap["ADDRESS"]
         var isExist = printers.any { s -> s.address == address }
-        if(!isExist){
+        if(!isExist) {
           var printer: ZebraPrinterInfo = ZebraPrinterInfo()
           printer.serialNumber = dataMap["SERIAL_NUMBER"]
           printer.address = address
@@ -345,7 +346,7 @@ class FlutterZebraSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     try {
       printers.clear()
 //      NetworkDiscoverer.findPrinters(handleNet)
-      BluetoothDiscoverer.findPrinters(context, handleNet)
+      BluetoothLeDiscoverer.findPrinters(context, handleNet)
     } catch (e: Exception) {
       e.printStackTrace()
       result.error("Error", "onDiscovery", e)
