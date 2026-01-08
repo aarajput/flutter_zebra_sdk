@@ -313,7 +313,7 @@ class FlutterZebraSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
       override fun foundPrinter(p0: DiscoveredPrinter) {
         Log.d(logTag, "foundPrinter $p0")
         var dataMap = p0.discoveryDataMap
-        var address = dataMap["ADDRESS"]
+        var address = dataMap["MAC_ADDRESS"]
         var isExist = printers.any { s -> s.address == address }
         if(!isExist) {
           var printer: ZebraPrinterInfo = ZebraPrinterInfo()
@@ -323,7 +323,7 @@ class FlutterZebraSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
           printer.availableLanguages = dataMap["AVAILABLE_LANGUAGES"]
           printer.darkness = dataMap["DARKNESS"]
           printer.jsonPortNumber = dataMap["JSON_PORT_NUMBER"]
-          printer.productName = dataMap["PRODUCT_NAME"]
+          printer.productName = dataMap["FRIENDLY_NAME"]
           printers.add(printer)
         }
       }
